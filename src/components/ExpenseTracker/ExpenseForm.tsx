@@ -1,6 +1,7 @@
 import React from "react";
+import { categories } from "../../App";
 
-const ExpenseTracker = () => {
+const ExpenseForm = () => {
   return (
     <>
       <h1 className="text-3xl font-bold underline">this is a form</h1>
@@ -25,11 +26,17 @@ const ExpenseTracker = () => {
           </label>
           <select name="" id="category" className="">
             <option value=""></option>
+            {categories.map((category) => (
+              <option key={category} value={category}></option>
+            ))}
           </select>
         </div>
+        <button className="h-10 w-40 bg-green-400 text-white rounded-lg">
+          Submit
+        </button>
       </form>
     </>
   );
 };
 
-export default ExpenseTracker;
+export default ExpenseForm;
