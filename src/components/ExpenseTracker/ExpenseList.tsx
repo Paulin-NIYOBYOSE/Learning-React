@@ -12,6 +12,7 @@ interface Props {
   onDelete: (id: number) => void;
 }
 const ExpenseList = ({ expenses, onDelete }: Props) => {
+  if (expenses.length === 0) return <div>No recent expenses dude 😁</div>;
   return (
     <>
       <table>
@@ -32,7 +33,7 @@ const ExpenseList = ({ expenses, onDelete }: Props) => {
               <td>
                 <button
                   onClick={() => onDelete(expenses.id)}
-                  className="bg-black text-white h-10 w-40"
+                  className="bg-red-500 text-white h-10 w-40"
                 >
                   Delete
                 </button>
@@ -42,7 +43,12 @@ const ExpenseList = ({ expenses, onDelete }: Props) => {
         </tbody>
         <tfoot>
           <td>Total</td>
-          <td>{expenses.reduce}</td>
+          <td>
+            $
+            {expenses
+              .reduce((acc, expense) => expense.amount + acc, 0)
+              .toFixed(2)}
+          </td>
           <td>{}</td>
           <td>{}</td>
         </tfoot>
