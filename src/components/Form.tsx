@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 const Form = () => {
   const { register, handleSubmit } = useForm();
-const onSubmit = data => console.log(data)
+  // const onSubmit = data => console.log(data)
   // const nameRef = useRef<HTMLInputElement>(null);
   // const ageRef = useRef<HTMLInputElement>(null);
   // const person = { name: "", age: 0 };

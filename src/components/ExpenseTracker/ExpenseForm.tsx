@@ -1,23 +1,48 @@
-import React from "react";
 import { categories } from "../../App";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const schema = z.object({
+  description: z.string().min(3),
+  amount: z.number().min(18),
+});
+
+type FormData = z.infer<typeof schema>;
 
 const ExpenseForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({ resolver: zodResolver(schema) });
   return (
     <>
       <h1 className="text-3xl font-bold underline">this is a form</h1>
-      <form action="">
+      <form onSubmit={handleSubmit((data) => console.log(data))}>
         <div>
           <label htmlFor="description" className="">
             Description
           </label>
-          <input id="description" type="text" className="" />
+          <input
+            id="description"
+            type="text"
+            className=""
+            {...register("description")}
+          />
+          {errors.description && <p>{errors.description.message}</p>}
         </div>
 
         <div>
           <label htmlFor="description" className="">
             Amount
           </label>
-          <input id="amount" type="number" className="" />
+          <input
+            {...register("amount")}
+            id="amount"
+            type="number"
+            className=""
+          />
         </div>
 
         <div>
